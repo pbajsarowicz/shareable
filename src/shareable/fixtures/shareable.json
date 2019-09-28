@@ -1,0 +1,17 @@
+[
+  {
+    "model": "shareable.shareable",
+    "pk": 1,
+    "fields": {
+      "uuid": "83cc9b8e-ddfd-4c7d-87f5-f4d30f742d02",
+      "password": "0",
+      "user": null,
+      "url": "expired",
+      "shareable_type": "URL",
+      "file": "",
+      "views_counter": 0,
+      "created_at": "2000-01-01T00:00:00.000Z",
+      "expired_at": "2000-01-02T00:00:00.000Z"
+    }
+  }
+]

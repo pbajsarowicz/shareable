@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<form action="" method="post" class="form-signin">
+  {% csrf_token %}
+  <img class="mb-4" src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Details</h1>
+  <p class="mt-5 mb-3 text-muted">{{ url }}</p>
+  <p class="mt-5 mb-3 text-muted">{{ password }}</p>
+</form>
+{% endblock %}

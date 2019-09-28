@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipdb = "*"
+requests = "*"
+parameterized = "*"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-bootstrap4 = "*"
+mysqlclient = "*"
+
+[requires]
+python_version = "3.7"

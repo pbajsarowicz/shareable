@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "4958b533-8d09-4125-ae76-88357f30db6b",
+		"name": "Shareable",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get an auth token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"root\",\n\t\"password\": \"root\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a link",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"http://onet.pl\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filename\": \"test.txt\",\n    \"content\": \"QWxhIG1hIGtvdGE=\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/file",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
