@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F
 from django.http import HttpResponseRedirect
@@ -12,6 +14,8 @@ from shareable.mixins import StaticContextDataMixin
 from shareable.models import Shareable
 from shareable.utils import generate_password
 
+logger = logging.getLogger(__name__)
+
 
 class ShareableAddView(StaticContextDataMixin, LoginRequiredMixin, FormView):
     template_name = 'shareable_form.html'
@@ -21,16 +25,25 @@ class ShareableAddView(StaticContextDataMixin, LoginRequiredMixin, FormView):
         'action_button_text': 'Add',
     }
 
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     def form_valid(self, form):
-        shareable_item = form.save(commit=False)
+        shareable_object = form.save(commit=False)
         password = generate_password()
-        shareable_item.password = password
-        shareable_item.user = self.request.user
-        shareable_item.save()
+        shareable_object.password = password
+        shareable_object.user = self.request.user
+        shareable_object.save()
         self.request.session['password'] = password
 
+        logger.info(
+            'Added a new %s (uuid: %s)',
+            shareable_object.shareable_type.lower(),
+            shareable_object.uuid
+        )
+
         return HttpResponseRedirect(
-            reverse('shareable-info', args=(shareable_item.uuid,))
+            reverse('shareable-info', args=(shareable_object.uuid,))
         )
 
 
@@ -39,7 +52,7 @@ class ShareableInfoView(LoginRequiredMixin, DetailView):
     model = Shareable
     slug_field = 'uuid'
     slug_url_kwarg = 'uuid'
-    context_object_name = 'shareable_item'
+    context_object_name = 'shareable_object'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,6 +93,12 @@ class ShareableDetailView(StaticContextDataMixin, FormView):
         )
         shareable_object.views_counter = F('views_counter') + 1
         shareable_object.save()
+
+        logger.info(
+            'Accessed the %s (uuid: %s)',
+            shareable_object.shareable_type.lower(),
+            shareable_object.uuid
+        )
 
         if shareable_object.shareable_type == ShareableTypes.URL:
             return redirect(shareable_object.url)

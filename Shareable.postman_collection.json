@@ -22,19 +22,95 @@
 					"raw": "{\n\t\"username\": \"root\",\n\t\"password\": \"root\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/auth",
-					"protocol": "http",
+					"raw": "https://shareable-app.herokuapp.com/api/auth",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"shareable-app",
+						"herokuapp",
+						"com"
 					],
-					"port": "8000",
 					"path": [
 						"api",
 						"auth"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get an auth token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"root\",\n\t\"password\": \"root\"\n}"
+						},
+						"url": {
+							"raw": "https://shareable-app.herokuapp.com/api/auth",
+							"protocol": "https",
+							"host": [
+								"shareable-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 18:30:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Cookie"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"49741cb43aca180eca9e506d0bbf493e3ecd8a6a\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Add a link",
@@ -44,13 +120,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					},
 					{
 						"key": "Authorization",
-						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
-						"type": "text"
+						"type": "text",
+						"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a"
 					}
 				],
 				"body": {
@@ -58,19 +134,100 @@
 					"raw": "{\n\t\"url\": \"http://onet.pl\"\n}\n"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/url",
-					"protocol": "http",
+					"raw": "https://shareable-app.herokuapp.com/api/url",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"shareable-app",
+						"herokuapp",
+						"com"
 					],
-					"port": "8000",
 					"path": [
 						"api",
 						"url"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Add a link",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\": \"http://onet.pl\"\n}\n"
+						},
+						"url": {
+							"raw": "https://shareable-app.herokuapp.com/api/url",
+							"protocol": "https",
+							"host": [
+								"shareable-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"url"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 18:31:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "116"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"url\": \"http://shareable-app.herokuapp.com/shareable/924b3fc8-9ed1-4fbf-bdec-f929a2ff5269/\",\n    \"password\": \"dCvAaUqGLk\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Add a file",
@@ -85,7 +242,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
+						"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a",
 						"type": "text"
 					}
 				],
@@ -94,19 +251,207 @@
 					"raw": "{\n    \"filename\": \"test.txt\",\n    \"content\": \"QWxhIG1hIGtvdGE=\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/file",
-					"protocol": "http",
+					"raw": "https://shareable-app.herokuapp.com/api/file",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"shareable-app",
+						"herokuapp",
+						"com"
 					],
-					"port": "8000",
 					"path": [
 						"api",
 						"file"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Add a file",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filename\": \"test.txt\",\n    \"content\": \"QWxhIG1hIGtvdGE=\"\n}"
+						},
+						"url": {
+							"raw": "https://shareable-app.herokuapp.com/api/file",
+							"protocol": "https",
+							"host": [
+								"shareable-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"file"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 18:31:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "116"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"url\": \"http://shareable-app.herokuapp.com/shareable/fb9d524d-c763-4508-8031-f2c95462af51/\",\n    \"password\": \"ChJAHUjMEP\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Access a shareable object",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"uuid\": \"924b3fc8-9ed1-4fbf-bdec-f929a2ff5269\",\n\t\"password\": \"dCvAaUqGLk\"\n}\n"
+				},
+				"url": {
+					"raw": "https://shareable-app.herokuapp.com/api/shareable",
+					"protocol": "https",
+					"host": [
+						"shareable-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"shareable"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Access a shareable object",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uuid\": \"924b3fc8-9ed1-4fbf-bdec-f929a2ff5269\",\n\t\"password\": \"dCvAaUqGLk\"\n}\n"
+						},
+						"url": {
+							"raw": "https://shareable-app.herokuapp.com/api/shareable",
+							"protocol": "https",
+							"host": [
+								"shareable-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"shareable"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 18:32:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": \"http://onet.pl\",\n    \"type\": \"URL\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a report",
@@ -115,28 +460,95 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 5dbd441d1d3325dae99f585bd97c5ea8ee4f2f0e",
+						"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a",
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://localhost:8000/api/report",
-					"protocol": "http",
+					"raw": "https://shareable-app.herokuapp.com/api/report",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"shareable-app",
+						"herokuapp",
+						"com"
 					],
-					"port": "8000",
 					"path": [
 						"api",
 						"report"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a report",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 49741cb43aca180eca9e506d0bbf493e3ecd8a6a",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://shareable-app.herokuapp.com/api/report",
+							"protocol": "https",
+							"host": [
+								"shareable-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"report"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 18:32:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"2019-09-29\": {\n        \"files\": 0,\n        \"links\": 1\n    }\n}"
+				}
+			]
 		}
 	]
 }

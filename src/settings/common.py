@@ -7,13 +7,10 @@ REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fpiq&_efd55lw&t+nfv&d=)htud*%ch-k2jremd0mje#aso&pt'
+SECRET_KEY = 'TO_BE_UPDATED'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -26,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
+    'corsheaders',
     'rest_framework.authtoken',
     'accounts',
     'api',
@@ -35,11 +33,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'accounts.middleware.UserAgentUpdateMiddleware',
 ]
 
@@ -66,11 +66,14 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-#
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'shareable',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
 
@@ -111,7 +114,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'src/static/')
+
+# Just for a demo purposes, e.g. some CDN should be used instead.
+STATIC_ROOT = os.path.join(BASE_DIR, 'src/static')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'src/media')
+MEDIA_URL = '/media/'
+
+FILES_DIR = 'uploads/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -127,9 +136,6 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = LOGIN_URL
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'src/')
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -141,4 +147,52 @@ REST_FRAMEWORK = {
 
 HASH_FIELD_SALT = 'T0_B3_UPD@T3D'
 SHAREABLE_EXPIRATION_HOURS = 24
-FILES_DIR = 'uploads/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': (
+                '%(levelname)s '
+                '%(asctime)s '
+                '%(module)s '
+                '%(pathname)s:%(lineno)d '
+                '%(message)s'
+            )
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'shareable': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': os.path.join(REPOSITORY_ROOT, 'logs', 'shareable.log'),
+        },
+        'api': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': os.path.join(REPOSITORY_ROOT, 'logs', 'api.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'shareable.views': {
+            'handlers': ['shareable'],
+            'level': 'DEBUG'
+        },
+        'api.views': {
+            'handlers': ['api'],
+            'level': 'DEBUG'
+        },
+    }
+}

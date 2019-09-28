@@ -1,4 +1,7 @@
+from base64 import b64encode
+
 from django.core.exceptions import ValidationError
+from django.db.models import F
 from rest_framework import serializers
 
 from api.fields import Base64FileField
@@ -70,3 +73,39 @@ class UserReportSerializer(serializers.ModelSerializer):
             )
 
         return response
+
+
+class ShareableRetrieveSerializer(serializers.Serializer):
+    ERROR_MESSAGE = (
+        'Shareable object not found or provided an incorrect password'
+    )
+    uuid = serializers.UUIDField()
+    password = serializers.CharField()
+
+    def validate(self, validated_data):
+        if not Shareable.objects.filter(
+            uuid=validated_data['uuid'],
+            password=validated_data['password']
+        ).exists():
+            raise ValidationError(self.ERROR_MESSAGE)
+
+        return validated_data
+
+    def to_representation(self, validated_data):
+        shareable_object = Shareable.objects.get(
+            uuid=validated_data['uuid'],
+            password=validated_data['password']
+        )
+        shareable_object.views_counter = F('views_counter') + 1
+        shareable_object.save()
+
+        if shareable_object.shareable_type == ShareableTypes.URL:
+            content = shareable_object.url
+        else:
+            with shareable_object.file as file:
+                content = b64encode(file.read()).decode()
+
+        return {
+            'content': content,
+            'type': shareable_object.shareable_type
+        }
