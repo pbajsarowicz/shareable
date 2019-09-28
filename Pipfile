@@ -12,7 +12,8 @@ parameterized = "*"
 django = "*"
 djangorestframework = "*"
 django-bootstrap4 = "*"
-mysqlclient = "*"
+six = "*"
+docker-compose = "*"
 
 [requires]
 python_version = "3.7"
